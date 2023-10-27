@@ -1,0 +1,7 @@
+
+#Files
+unzip-error.txt
+*.zip
+
+#Folders
+submission*
