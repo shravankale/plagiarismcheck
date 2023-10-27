@@ -17,7 +17,7 @@ Contains scripts for checking plagiarism across a set of files. It uses the JPLA
     - Run the script using ```./jplag.sh```
     - The output of this script will result in the creation of a zip file which will have the name provided by the ```-r``` option flag in jplag.sh
 3. Visualization of results:
-    - Open the visualizer at https://github.com/jplag/JPlag#cli
+    - Open the visualizer at [JPLAG visualizer](https://jplag.github.io/JPlag/)
     - Drag and drop the zip created in Step 2c
 
 Note: If there are any compiler related issues with using the jar file, it may be due to XCode related service agreements that need to be approved.
