@@ -2,7 +2,7 @@ Contains scripts for checking plagiarism across a set of files. It uses the JPLA
 
 #### Pre-requirement 
 1. Requires JDK 17
-2. Fetch the jplag-X.Y.Z-jar-with-dependencies.jar from [https://github.com/jplag/JPlag](https://github.com/jplag/jplag/releases)
+2. Fetch the jplag-X.Y.Z-jar-with-dependencies.jar from [Download JPlag](https://github.com/jplag/jplag/releases)
 
 #### How to check for plagiarism
 1. Use the unzip-script.py to unzip a directory full of zips.
