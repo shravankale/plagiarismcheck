@@ -25,19 +25,19 @@ if [[ "$OSTYPE" == "msys" ]]; then
     echo "Running on Windows"
     java -jar "$jar_path" "$unzipped_dir_path" ^
     -l python3 ^
-    -t 2 ^
+    -t 3 ^
     -n -1 ^
     -r jplag_visualize ^
     -m 0.95
-# Check if the OS is Linux
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+# Check if the OS is Linux/Mac
+elif [[ "$OSTYPE" == "linux-gnu"* ]] || [[ "$OSTYPE" == "darwin"* ]]; then
     echo "Running on Linux"
     java -jar "$jar_path" submissions-unzip \
     -l python3 \
-    -t 2 \
+    -t 3 \
     -n -1 \
     -r jplag_visualize \
-    -m 0.95
+    -m 0.90
 else
     echo "Unsupported OS"
 fi

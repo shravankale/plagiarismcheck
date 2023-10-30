@@ -2,6 +2,9 @@
 #Files
 unzip-error.txt
 *.zip
+*.jar
 
 #Folders
 submission*
+chatgpt
+.vscode

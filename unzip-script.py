@@ -1,6 +1,15 @@
 import zipfile
 import os
-import sys
+import sys, shutil
+
+def remove_resource_forks(target_directory):
+    "Removes the __MACOSX folders"
+
+    for root, dirs, files in os.walk(target_directory):
+        for name in dirs:
+            if '__MACOSX' in name:
+                shutil.rmtree(os.path.join(root,name))
+
 
 def extract_zip(zip_file, destination_folder):
     """Extract a zip file to the specified destination folder."""
@@ -39,6 +48,7 @@ def main(root_folder, target_directory):
                 success = extract_zip(zip_path, destination_folder)
                 if success:
                     successful_unzips += 1
+                    remove_resource_forks(destination_folder)
                 else:
                     unsuccessful_unzips.append(zip_path)
 
@@ -47,13 +57,15 @@ def main(root_folder, target_directory):
         for path in unsuccessful_unzips:
             error_file.write(f"{path}\n")
 
+    #remove_resource_forks(target_directory)
+
     # Print statistics
     print(f"Total zip files: {total_zip_files}")
     print(f"Successfully unzipped: {successful_unzips}")
     print(f"Failed to unzip: {total_zip_files - successful_unzips}")
     print("\nStatistics of files in each extracted folder:")
-    for folder_name, _, file_names in os.walk(target_directory):
-        print(f"{folder_name}: {len(file_names)} files")
+    #for folder_name, _, file_names in os.walk(target_directory):
+        #print(f"{folder_name}: {len(file_names)} files")
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
