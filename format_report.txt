@@ -1,0 +1,7 @@
+## Name of Project and Lab
+
+1.  Submission X and Submission Y    <similarity score>
+    Notes: Identical files, Credits to each other if any
+
+2.  Submission A and Submission B    <similarity score>
+    Notes: Identical files, Credits to each other if any

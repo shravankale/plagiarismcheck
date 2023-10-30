@@ -3,6 +3,7 @@
 unzip-error.txt
 *.zip
 *.jar
+report*.txt
 
 #Folders
 submission*
