@@ -1,4 +1,4 @@
-import zipfile
+import zipfile, argparse
 import os
 import sys, shutil
 
@@ -10,6 +10,13 @@ def remove_resource_forks(target_directory):
             if '__MACOSX' in name:
                 shutil.rmtree(os.path.join(root,name))
 
+def remove_files_with_string(target_directory,exclude_string=None):
+
+    if exclude_string is not None:
+        for root, dirs, files in os.walk(target_directory):
+            for file in files:
+                if exclude_string.lower() in file.lower():
+                    os.remove(os.path.join(root,file))
 
 def extract_zip(zip_file, destination_folder):
     """Extract a zip file to the specified destination folder."""
@@ -20,7 +27,7 @@ def extract_zip(zip_file, destination_folder):
     except zipfile.BadZipFile:
         return False
 
-def main(root_folder, target_directory):
+def main(root_folder, target_directory, exclude_string=None):
     """Extract all zip files from the root_folder to target_directory."""
     if not os.path.exists(root_folder):
         print(f"Folder '{root_folder}' doesn't exist!")
@@ -49,6 +56,7 @@ def main(root_folder, target_directory):
                 if success:
                     successful_unzips += 1
                     remove_resource_forks(destination_folder)
+                    remove_files_with_string(destination_folder,exclude_string)
                 else:
                     unsuccessful_unzips.append(zip_path)
 
@@ -57,19 +65,21 @@ def main(root_folder, target_directory):
         for path in unsuccessful_unzips:
             error_file.write(f"{path}\n")
 
-    #remove_resource_forks(target_directory)
-
     # Print statistics
+    print(f"Unzipped folder created in: {target_directory}")
+    if exclude_string is not None:
+        print(f"Files removed with name containing string: {exclude_string}\n")
     print(f"Total zip files: {total_zip_files}")
     print(f"Successfully unzipped: {successful_unzips}")
     print(f"Failed to unzip: {total_zip_files - successful_unzips}")
-    print("\nStatistics of files in each extracted folder:")
-    #for folder_name, _, file_names in os.walk(target_directory):
-        #print(f"{folder_name}: {len(file_names)} files")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python unzip_script.py [root_folder_path] [target_directory_path]")
-        sys.exit(1)
 
-    main(sys.argv[1], sys.argv[2])
+    parser = argparse.ArgumentParser(description="JPLAG plagiarism checker")
+    parser.add_argument('-e','--exclude-file-with-string', dest='exclude_file', help="Exclude files with name containing string", default=None)
+    parser.add_argument('root_folder_path', type=str,help='Root path to zipped submissions folder')
+    parser.add_argument('target_directory_path', type=str,help='Path to create new directory to save unzipped files')
+
+    args = parser.parse_args()
+ 
+    main(args.root_folder_path,args.target_directory_path,args.exclude_file)

@@ -6,7 +6,8 @@ Contains scripts for checking plagiarism across a set of files. It uses the JPLA
 
 #### How to check for plagiarism
 1. Use the unzip-script.py to unzip a directory full of zips.
-    - Usage: python unzip_script.py [root_folder_path] [target_directory_path]
+    - Usage: python -e [string_to_exlude] unzip_script.py [root_folder_path] [target_directory_path]
+    - e: Optional flag to remove files names containg the string [string_to_exlude] (no quotes)
     - root_folder_path = Source of the directory containing the zips (Example: submissions)
     - target_directory_path =  Source of the directory to store unzipped files in sub-directories (Example: submissions-unzip)
     - The sub-directory in the target directory is named after the zip file.
